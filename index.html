@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link href="style.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>to do list</title>
+    </head>
+    <body>
+            <div class="container">
+                <div class="box">
+                    <h1>To Do List</h1>
+                    <input type="text" placeholder="write here..." id="inputbox">
+                    <ul id="inputlist"></ul>
+                </div>
+            </div>
+
+            <script>
+                let inputbox = document.querySelector('#inputbox');
+                let inputlist = document.querySelector('#inputlist');
+            
+                inputbox.addEventListener("keyup", function(event) {
+                    if (event.key === "Enter") {
+                        addItem(this.value);
+                        this.value = "";
+                    }
+                });
+            
+                let addItem = (inputValue) => {
+                    let listItem = document.createElement("li");
+                    listItem.innerHTML = `
+                        <span class="task-text">${inputValue}</span>
+                        <button class="done-button">done</button>
+                        <i class="delete-icon">❌</i>
+                    `;
+                    
+                    inputlist.appendChild(listItem);
+                    
+                    listItem.querySelector('.done-button').addEventListener('click', () => {
+                        listItem.querySelector('.task-text').classList.toggle('completed');
+                    });
+            
+                    
+                    listItem.querySelector('.delete-icon').addEventListener('click', () => {
+                        inputlist.removeChild(listItem);
+                    });
+                }
+            </script>
+            
+            <style>
+                .completed {
+                    /* text-decoration: line-through; */
+                    color: rgb(0, 0, 0);
+                    
+                }
+            </style>
+            
+                                                            </body> 
+
+            
+    </html>
